@@ -103,12 +103,12 @@
 			children = (
 				6355DB461D33E65D0070E066 /* AppDelegate.swift */,
 				6355DB4D1D33E65D0070E066 /* Assets.xcassets */,
-				6355DB4F1D33E65D0070E066 /* LaunchScreen.storyboard */,
-				6355DB521D33E65D0070E066 /* Info.plist */,
 				6355DB741D33E6FD0070E066 /* MapViewController.swift */,
 				6355DB751D33E6FD0070E066 /* MapViewController.xib */,
 				6355DB781D33F6470070E066 /* JournalEntryViewController.swift */,
 				6355DB791D33F6470070E066 /* JournalEntryViewController.xib */,
+				6355DB4F1D33E65D0070E066 /* LaunchScreen.storyboard */,
+				6355DB521D33E65D0070E066 /* Info.plist */,
 			);
 			path = iXplore;
 			sourceTree = "<group>";

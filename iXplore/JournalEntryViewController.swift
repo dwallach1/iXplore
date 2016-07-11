@@ -15,37 +15,49 @@ private extension Selector {
 }
 
 class JournalEntry: NSObject, MKAnnotation {
-    var title: String? = ""
+    var title: String? = "hello"
     var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D()
     var mysubtitle: String = ""
+    var date: String = ""
 }
 
 class JournalEntryViewController: UIViewController {
+    
+    static var sharedInstance = JournalEntryViewController()
+    var currEntry = JournalEntry()
+//    var journalEntriesArray: [JournalEntry] = [JournalEntry]()
+//    let oneEntry = JournalEntry()
+//    let twoEntry = JournalEntry()
+//    var journalEntriesArray: [JournalEntry] = [JournalEntry]()
+    
+    //journalEntriesArray.append(oneEntry)
+    
+    let titleField = UITextField(frame: CGRect(x: 20, y: 60, width: 200, height: 100))
+    let notesField = UITextField(frame: CGRect(x: 20, y: 115, width: 200, height: 100))
+    let xCoordinates = UITextField(frame: CGRect(x: 20, y: 175, width: 175, height: 100))
+    let yCoordinates = UITextField(frame: CGRect(x: 200, y: 175, width: 175, height: 100))
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let titleField = UITextField(frame: CGRect(x: 20, y: 60, width: 200, height: 100))
+        
         titleField.placeholder = "Title"
-        let notesField = UITextField(frame: CGRect(x: 20, y: 115, width: 200, height: 100))
         notesField.placeholder = "Notes"
-        let xCoordinates = UITextField(frame: CGRect(x: 20, y: 175, width: 200, height: 100))
         xCoordinates.placeholder = "X-Coordinate"
-        let yCoordinates = UITextField(frame: CGRect(x: 200, y: 175, width: 200, height: 100))
         yCoordinates.placeholder = "Y-Coordinate"
         view.addSubview(titleField)
         view.addSubview(notesField)
         view.addSubview(xCoordinates)
         view.addSubview(yCoordinates)
         
-        let cancelButton = UIButton(frame: CGRect(x: 20, y: 220, width: 75, height: 75))
+        let cancelButton = UIButton(frame: CGRect(x: 30, y: 240, width: 75, height: 75))
         cancelButton.setTitle("Cancel", forState: .Normal)
         cancelButton.titleLabel!.font = UIFont(name: "Arial", size: 15)
         cancelButton.setTitleColor(UIColor .blueColor(), forState: .Normal)
         cancelButton.addTarget(self, action: .cancelButton, forControlEvents: .TouchUpInside)
-//        cancelButton.targetForAction(.cancelButton, withSender: self)
-        let saveButton = UIButton(frame: CGRect(x: 200, y: 220, width: 75, height: 75))
+        
+        let saveButton = UIButton(frame: CGRect(x: 220, y: 240, width: 75, height: 75))
         saveButton.setTitle("Save", forState: .Normal)
-//        saveButton.targetForAction(.saveButton, withSender: self)
         saveButton.addTarget(self, action: .saveButton, forControlEvents: .TouchUpInside)
         saveButton.titleLabel!.font = UIFont(name: "Arial", size: 15)
         saveButton.setTitleColor(UIColor .blueColor(), forState: .Normal)
@@ -59,7 +71,17 @@ class JournalEntryViewController: UIViewController {
     }
     
     func saveButtonTapped() {
-        
+        let newEntry = JournalEntry()
+        newEntry.title = titleField.text!
+        newEntry.mysubtitle = notesField.text!
+//        newEntry.coordinate = CLLocationCoordinate2D(latitude: Double(xCoordinates)!, longitude: Double(yCoordinates)!)
+//        JournalEntryViewController.sharedInstance.journalEntriesArray.append(newEntry)
+        currEntry = newEntry
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func returnCurrEntry() -> JournalEntry {
+        return currEntry
     }
     
     func cancelButtonTapped() {
