@@ -10,10 +10,9 @@ import UIKit
 import MapKit
 import CoreLocation
 
-private extension Selector {
-    static let addButtonTapped = #selector(MapViewController.addButtonTapped)
-    static let refreshButtonTapped = #selector(MapViewController.refreshButtonTapped)
-}
+//private extension Selector {
+//    static let addButtonTapped = #selector(MapViewController.addButtonTapped)
+//}
 
 class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
@@ -30,22 +29,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
         
         self.title = "iXplore"
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: .addButtonTapped)
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(addButtonTapped))
         self.navigationItem.rightBarButtonItem = addButton
-        
-        let refreshButton = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: .refreshButtonTapped)
-        self.navigationItem.leftBarButtonItem = refreshButton
         
         mapView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height/2 + 40)
         view.addSubview(mapView)
         
         let location = CLLocationCoordinate2D(latitude: -33.906764,longitude: 18.4164983)
-        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let span = MKCoordinateSpanMake(0.07, 0.07)
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
         mapView.zoomEnabled = true
-        
-
+        mapView.showsUserLocation = true
+        mapView.tintColor = UIColor.blueColor()
+    
         
         tableView.frame = CGRect(x: 0, y: view.frame.maxY/2 + 40, width: view.frame.width - 220, height: (view.frame.height/2))
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -55,7 +52,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
         tableView.delegate = self
         mapView.delegate = self
         locationManager.delegate = self
-        mapView.delegate = self
         
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = 100
@@ -71,10 +67,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
     func addButtonTapped() {
         let journalEntryVC = JournalEntryViewController(nibName: "JournalEntryViewController", bundle: nil)
         presentViewController(journalEntryVC, animated: true, completion: nil)
-    }
-    
-    func refreshButtonTapped() {
-        tableView.reloadData()
+        locationManager.stopUpdatingLocation()
     }
     
     //tableView delegate protocol
@@ -113,6 +106,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
     //mapview protocol
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
+        if annotation is MKUserLocation {
+            return nil
+        }
         let identifier = "MyPin"
         //Deque annotationView could be nil! We are casting as MKPinAnnotationView because we want to change the color of the pin.
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView
@@ -121,8 +117,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
             //Create new annotationView
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView!.canShowCallout = true
-            let label = UILabel(frame: CGRect(x:0, y:0, width: 100, height: 30))
-            annotationView!.detailCalloutAccessoryView = label
+//            let label = UILabel(frame: CGRect(x:0, y:0, width: 100, height: 30))
+//            annotationView!.detailCalloutAccessoryView = label
     
             //Change background color of pin
             annotationView?.pinTintColor = UIColor.blackColor()
@@ -132,10 +128,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
             frame.size.width = 100
             annotationView!.frame = frame
             
-            let theLabel = annotationView!.detailCalloutAccessoryView as! UILabel
-            theLabel.text = annotation.title!
-            
         }
+        
+//        let theLabel = annotationView!.detailCalloutAccessoryView as! UILabel
+//        theLabel.text = annotation.title!
         return annotationView
     }
     
@@ -150,12 +146,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
     }
     
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(newLocation) { placemarks, error in
-            if let placemark = placemarks?.first {
-                self.title = placemark.name
-            }
-        }
+//        let geocoder = CLGeocoder()
+//        geocoder.reverseGeocodeLocation(newLocation) { placemarks, error in
+//            if let placemark = placemarks?.first {
+//                self.title = placemark.name
+//            }
+//        }
         locationManager.stopUpdatingLocation()
     }
     
