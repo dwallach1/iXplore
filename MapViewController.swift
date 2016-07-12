@@ -8,55 +8,25 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 private extension Selector {
     static let addButtonTapped = #selector(MapViewController.addButtonTapped)
     static let refreshButtonTapped = #selector(MapViewController.refreshButtonTapped)
 }
 
-class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
     let tableView = UITableView()
     let mapView = MKMapView()
+    let locationManager = CLLocationManager()
     
-
-    var journalEntriesArray: [JournalEntry] = [JournalEntry]()
-
-    let entry = JournalEntry()
-    let entry2 = JournalEntry()
-    let entry3 = JournalEntry()
-    
-    
-//    func entryList() -> [JournalEntry] {
-//        
-//        let entry = JournalEntry()
-//        entry.title = "Workshop 17"
-//        entry.coordinate = CLLocationCoordinate2D(latitude: -33.906764,longitude: 18.4164983)
-//        
-//        let entry2 = JournalEntry()
-//        entry2.title = "Truth Coffee"
-//        entry2.coordinate = CLLocationCoordinate2D(latitude: -33.9281976,longitude: 18.4227045)
-//        
-//        let entry3 = JournalEntry()
-//        entry3.title = "Chop Chop Coffee"
-//        entry3.coordinate = CLLocationCoordinate2D(latitude: -33.9271879,longitude: 18.4327055)
-//        
-//        return [entry,entry2, entry3]
-//    }
+    //var journalEntries = JournalEntryViewController.sharedInstance.journalEntryList
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        entry.title = "Workshop 17"
-        entry.coordinate = CLLocationCoordinate2D(latitude: -33.906764,longitude: 18.4164983)
-        entry2.title = "Truth Coffee"
-        entry2.coordinate = CLLocationCoordinate2D(latitude: -33.9281976,longitude: 18.4227045)
-        entry3.title = "Chop Chop Coffee"
-        entry3.coordinate = CLLocationCoordinate2D(latitude: -33.9271879,longitude: 18.4327055)
     
-        journalEntriesArray.append(entry)
-        journalEntriesArray.append(entry2)
-        journalEntriesArray.append(entry3)
+        JournalEntryViewController.sharedInstance.fillDummyArray()
         
         self.title = "iXplore"
         
@@ -75,38 +45,50 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
         mapView.setRegion(region, animated: true)
         mapView.zoomEnabled = true
         
-        mapView.delegate = self
-        mapView.addAnnotations(journalEntriesArray)
+
         
-        tableView.frame = CGRect(x: 0, y: view.frame.maxY/2 + 40, width: view.frame.width, height: (view.frame.height / 2))
+        tableView.frame = CGRect(x: 0, y: view.frame.maxY/2 + 40, width: view.frame.width - 220, height: (view.frame.height/2))
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         view.addSubview(tableView)
         
         tableView.dataSource = self
         tableView.delegate = self
+        mapView.delegate = self
+        locationManager.delegate = self
+        mapView.delegate = self
+        
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = 100
+        locationManager.distanceFilter = 10
+        locationManager.startUpdatingLocation()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        tableView.reloadData()
+        mapView.addAnnotations(JournalEntryViewController.sharedInstance.journalEntryList)
     }
     
     func addButtonTapped() {
         let journalEntryVC = JournalEntryViewController(nibName: "JournalEntryViewController", bundle: nil)
-        navigationController?.pushViewController(journalEntryVC, animated: true)
-        tableView.reloadData()
+        presentViewController(journalEntryVC, animated: true, completion: nil)
     }
     
     func refreshButtonTapped() {
         tableView.reloadData()
     }
-
+    
+    //tableView delegate protocol
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView (tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return journalEntriesArray.count
+        return JournalEntryViewController.sharedInstance.journalEntryList.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel?.text = "Entry: \(journalEntriesArray[indexPath.row].title!)"
+        cell.textLabel?.text = "Entry \(indexPath.row + 1): \(JournalEntryViewController.sharedInstance.journalEntryList[indexPath.row].title!)"
         return cell
     }
     
@@ -116,19 +98,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath){
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            journalEntriesArray.removeAtIndex(indexPath.row)
+            JournalEntryViewController.sharedInstance.journalEntryList.removeAtIndex(indexPath.row)
             tableView.reloadData()
         }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("\(journalEntriesArray[indexPath.row].title)")
-        let location = CLLocationCoordinate2D(latitude: journalEntriesArray[indexPath.row].coordinate.latitude,longitude: journalEntriesArray[indexPath.row].coordinate.longitude)
-        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let location = CLLocationCoordinate2D(latitude: JournalEntryViewController.sharedInstance.journalEntryList[indexPath.row].coordinate.latitude,longitude: JournalEntryViewController.sharedInstance.journalEntryList[indexPath.row].coordinate.longitude)
+        let span = MKCoordinateSpanMake(0.005, 0.005)
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
     }
     
+    //mapview protocol
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
         let identifier = "MyPin"
@@ -151,11 +133,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
             annotationView!.frame = frame
             
             let theLabel = annotationView!.detailCalloutAccessoryView as! UILabel
-            theLabel.text = "\(annotation.title!)"
+            theLabel.text = annotation.title!
             
         }
-        
         return annotationView
+    }
+    
+    //location manager protocol
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        if status == .Denied {
+            let alert = UIAlertController(title: "You have chosen not to share your location", message: "Certain functions of this application will be limited, please go into settings to reconfigure", preferredStyle: .Alert)
+            let dismiss = UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil)
+            alert.addAction(dismiss)
+            presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(newLocation) { placemarks, error in
+            if let placemark = placemarks?.first {
+                self.title = placemark.name
+            }
+        }
+        locationManager.stopUpdatingLocation()
     }
     
     override func didReceiveMemoryWarning() {

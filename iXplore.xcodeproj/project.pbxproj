@@ -104,8 +104,8 @@
 				6355DB461D33E65D0070E066 /* AppDelegate.swift */,
 				6355DB4D1D33E65D0070E066 /* Assets.xcassets */,
 				6355DB741D33E6FD0070E066 /* MapViewController.swift */,
-				6355DB751D33E6FD0070E066 /* MapViewController.xib */,
 				6355DB781D33F6470070E066 /* JournalEntryViewController.swift */,
+				6355DB751D33E6FD0070E066 /* MapViewController.xib */,
 				6355DB791D33F6470070E066 /* JournalEntryViewController.xib */,
 				6355DB4F1D33E65D0070E066 /* LaunchScreen.storyboard */,
 				6355DB521D33E65D0070E066 /* Info.plist */,
@@ -199,6 +199,7 @@
 				TargetAttributes = {
 					6355DB421D33E65D0070E066 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = HABT2LUTZK;
 					};
 					6355DB561D33E65D0070E066 = {
 						CreatedOnToolsVersion = 7.3;
@@ -399,10 +400,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = iXplore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidwallach.iXplore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -410,10 +414,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = iXplore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidwallach.iXplore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -482,6 +489,7 @@
 				6355DB6D1D33E65D0070E066 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6355DB6E1D33E65D0070E066 /* Build configuration list for PBXNativeTarget "iXploreTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +498,7 @@
 				6355DB701D33E65D0070E066 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6355DB711D33E65D0070E066 /* Build configuration list for PBXNativeTarget "iXploreUITests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +507,7 @@
 				6355DB731D33E65D0070E066 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

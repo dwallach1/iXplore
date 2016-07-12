@@ -18,20 +18,29 @@ class JournalEntry: NSObject, MKAnnotation {
     var title: String? = "hello"
     var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D()
     var mysubtitle: String = ""
-    var date: String = ""
+    var date: NSDate = NSDate(timeIntervalSinceReferenceDate: 12/2/2)
 }
 
 class JournalEntryViewController: UIViewController {
     
     static var sharedInstance = JournalEntryViewController()
-    var currEntry = JournalEntry()
-//    var journalEntriesArray: [JournalEntry] = [JournalEntry]()
-//    let oneEntry = JournalEntry()
-//    let twoEntry = JournalEntry()
-//    var journalEntriesArray: [JournalEntry] = [JournalEntry]()
+    var journalEntryList: [JournalEntry] = [JournalEntry]()
     
-    //journalEntriesArray.append(oneEntry)
-    
+    func fillDummyArray() {
+        let entry = JournalEntry()
+        let entry2 = JournalEntry()
+        let entry3 = JournalEntry()
+        entry.title = "Workshop 17"
+        entry.coordinate = CLLocationCoordinate2D(latitude: -33.906764,longitude: 18.4164983)
+        entry2.title = "Truth Coffee"
+        entry2.coordinate = CLLocationCoordinate2D(latitude: -33.9281976,longitude: 18.4227045)
+        entry3.title = "Chop Chop Coffee"
+        entry3.coordinate = CLLocationCoordinate2D(latitude: -33.9271879,longitude: 18.4327055)
+        JournalEntryViewController.sharedInstance.journalEntryList.append(entry)
+        JournalEntryViewController.sharedInstance.journalEntryList.append(entry2)
+        JournalEntryViewController.sharedInstance.journalEntryList.append(entry3)
+    }
+
     let titleField = UITextField(frame: CGRect(x: 20, y: 60, width: 200, height: 100))
     let notesField = UITextField(frame: CGRect(x: 20, y: 115, width: 200, height: 100))
     let xCoordinates = UITextField(frame: CGRect(x: 20, y: 175, width: 175, height: 100))
@@ -40,7 +49,6 @@ class JournalEntryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         titleField.placeholder = "Title"
         notesField.placeholder = "Notes"
         xCoordinates.placeholder = "X-Coordinate"
@@ -50,16 +58,18 @@ class JournalEntryViewController: UIViewController {
         view.addSubview(xCoordinates)
         view.addSubview(yCoordinates)
         
-        let cancelButton = UIButton(frame: CGRect(x: 30, y: 240, width: 75, height: 75))
+        let cancelButton = UIButton(frame: CGRect(x: 20, y: 250, width: 100, height: 40))
         cancelButton.setTitle("Cancel", forState: .Normal)
         cancelButton.titleLabel!.font = UIFont(name: "Arial", size: 15)
-        cancelButton.setTitleColor(UIColor .blueColor(), forState: .Normal)
+        cancelButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        cancelButton.backgroundColor = UIColor.orangeColor()
         cancelButton.addTarget(self, action: .cancelButton, forControlEvents: .TouchUpInside)
         
-        let saveButton = UIButton(frame: CGRect(x: 220, y: 240, width: 75, height: 75))
+        let saveButton = UIButton(frame: CGRect(x: 200, y: 250, width: 100, height: 40))
         saveButton.setTitle("Save", forState: .Normal)
         saveButton.addTarget(self, action: .saveButton, forControlEvents: .TouchUpInside)
         saveButton.titleLabel!.font = UIFont(name: "Arial", size: 15)
+        saveButton.backgroundColor = UIColor.orangeColor()
         saveButton.setTitleColor(UIColor .blueColor(), forState: .Normal)
         view.addSubview(cancelButton)
         view.addSubview(saveButton)
@@ -74,28 +84,13 @@ class JournalEntryViewController: UIViewController {
         let newEntry = JournalEntry()
         newEntry.title = titleField.text!
         newEntry.mysubtitle = notesField.text!
-//        newEntry.coordinate = CLLocationCoordinate2D(latitude: Double(xCoordinates)!, longitude: Double(yCoordinates)!)
-//        JournalEntryViewController.sharedInstance.journalEntriesArray.append(newEntry)
-        currEntry = newEntry
-        navigationController?.popViewControllerAnimated(true)
-    }
-    
-    func returnCurrEntry() -> JournalEntry {
-        return currEntry
+        newEntry.coordinate = CLLocationCoordinate2D(latitude: Double(xCoordinates.text!)!,longitude: Double(yCoordinates.text!)!)
+        JournalEntryViewController.sharedInstance.journalEntryList.append(newEntry)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func cancelButtonTapped() {
-        navigationController?.popViewControllerAnimated(true)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
