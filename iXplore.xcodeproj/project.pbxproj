@@ -16,6 +16,8 @@
 		6355DB771D33E6FD0070E066 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6355DB751D33E6FD0070E066 /* MapViewController.xib */; };
 		6355DB7A1D33F6470070E066 /* JournalEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6355DB781D33F6470070E066 /* JournalEntryViewController.swift */; };
 		6355DB7B1D33F6470070E066 /* JournalEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6355DB791D33F6470070E066 /* JournalEntryViewController.xib */; };
+		63600FCC1D3562AC00A5930F /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63600FCA1D3562AC00A5930F /* UserTableViewCell.swift */; };
+		63600FCD1D3562AC00A5930F /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63600FCB1D3562AC00A5930F /* UserTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		6355DB751D33E6FD0070E066 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapViewController.xib; path = ../MapViewController.xib; sourceTree = "<group>"; };
 		6355DB781D33F6470070E066 /* JournalEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalEntryViewController.swift; sourceTree = "<group>"; };
 		6355DB791D33F6470070E066 /* JournalEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JournalEntryViewController.xib; sourceTree = "<group>"; };
+		63600FCA1D3562AC00A5930F /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		63600FCB1D3562AC00A5930F /* UserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 				6355DB781D33F6470070E066 /* JournalEntryViewController.swift */,
 				6355DB751D33E6FD0070E066 /* MapViewController.xib */,
 				6355DB791D33F6470070E066 /* JournalEntryViewController.xib */,
+				63600FCA1D3562AC00A5930F /* UserTableViewCell.swift */,
+				63600FCB1D3562AC00A5930F /* UserTableViewCell.xib */,
 				6355DB4F1D33E65D0070E066 /* LaunchScreen.storyboard */,
 				6355DB521D33E65D0070E066 /* Info.plist */,
 			);
@@ -240,6 +246,7 @@
 				6355DB771D33E6FD0070E066 /* MapViewController.xib in Resources */,
 				6355DB4E1D33E65D0070E066 /* Assets.xcassets in Resources */,
 				6355DB7B1D33F6470070E066 /* JournalEntryViewController.xib in Resources */,
+				63600FCD1D3562AC00A5930F /* UserTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63600FCC1D3562AC00A5930F /* UserTableViewCell.swift in Sources */,
 				6355DB761D33E6FD0070E066 /* MapViewController.swift in Sources */,
 				6355DB471D33E65D0070E066 /* AppDelegate.swift in Sources */,
 				6355DB7A1D33F6470070E066 /* JournalEntryViewController.swift in Sources */,

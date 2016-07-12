@@ -10,29 +10,30 @@ import UIKit
 import MapKit
 import CoreLocation
 
-//private extension Selector {
-//    static let addButtonTapped = #selector(MapViewController.addButtonTapped)
-//}
-
 class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
     let tableView = UITableView()
     let mapView = MKMapView()
     let locationManager = CLLocationManager()
     
-    //var journalEntries = JournalEntryViewController.sharedInstance.journalEntryList
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        JournalEntryViewController.sharedInstance.fillDummyArray()
+        
+        let manager = NSFileManager.defaultManager()
+        let documents = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+        let fileURL = documents.URLByAppendingPathComponent("journalEntries.txt")
+        let path = fileURL.path
+        
+        if let entry = NSKeyedUnarchiver.unarchiveObjectWithFile(fileURL.path!) as? JournalEntry {
+            JournalEntryViewController.sharedInstance.journalEntryList.append(entry)
+        }
         
         self.title = "iXplore"
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(addButtonTapped))
         self.navigationItem.rightBarButtonItem = addButton
         
-        mapView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height/2 + 40)
+        mapView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height/2 + 100)
         view.addSubview(mapView)
         
         let location = CLLocationCoordinate2D(latitude: -33.906764,longitude: 18.4164983)
@@ -41,12 +42,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
         mapView.setRegion(region, animated: true)
         mapView.zoomEnabled = true
         mapView.showsUserLocation = true
-        mapView.tintColor = UIColor.blueColor()
+        mapView.tintColor = UIColor.redColor()
     
         
-        tableView.frame = CGRect(x: 0, y: view.frame.maxY/2 + 40, width: view.frame.width - 220, height: (view.frame.height/2))
+        tableView.frame = CGRect(x: 0, y: view.frame.maxY/2 + 100, width: view.frame.width - 220, height: (view.frame.height/2))
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         view.addSubview(tableView)
+        tableView.registerNib(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "entryCell")
+        tableView.rowHeight = 88
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -70,6 +73,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
         locationManager.stopUpdatingLocation()
     }
     
+    
+    /******** Table View **************/
+    
     //tableView delegate protocol
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -80,8 +86,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel?.text = "Entry \(indexPath.row + 1): \(JournalEntryViewController.sharedInstance.journalEntryList[indexPath.row].title!)"
+        let currentEntry = JournalEntryViewController.sharedInstance.journalEntryList
+        let cell = tableView.dequeueReusableCellWithIdentifier("entryCell", forIndexPath: indexPath) as! UserTableViewCell
+        cell.titleLabel.text = "\(currentEntry[indexPath.row].title!)"
+        cell.dateLabel.text = "\(currentEntry[indexPath.row].title!)"
+        cell.photoView.image = currentEntry[indexPath.row].image
         return cell
     }
     
@@ -103,6 +112,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
         mapView.setRegion(region, animated: true)
     }
     
+    /******* Map View **************/
+    
     //mapview protocol
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -121,7 +132,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
 //            annotationView!.detailCalloutAccessoryView = label
     
             //Change background color of pin
-            annotationView?.pinTintColor = UIColor.blackColor()
+            annotationView?.pinTintColor = UIColor.greenColor()
             
             var frame = annotationView!.frame
             frame.size.height = 100
@@ -159,15 +170,5 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
