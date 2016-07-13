@@ -24,8 +24,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
         let fileURL = documents.URLByAppendingPathComponent("journalEntries.txt")
         let path = fileURL.path
         
-        if let entry = NSKeyedUnarchiver.unarchiveObjectWithFile(fileURL.path!) as? JournalEntry {
-            JournalEntryViewController.sharedInstance.journalEntryList.append(entry)
+        if let entryArray = NSKeyedUnarchiver.unarchiveObjectWithFile(fileURL.path!) as? [JournalEntry] {
+            JournalEntryViewController.sharedInstance.journalEntryList = entryArray
         }
         
         self.title = "iXplore"
@@ -89,8 +89,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
         let currentEntry = JournalEntryViewController.sharedInstance.journalEntryList
         let cell = tableView.dequeueReusableCellWithIdentifier("entryCell", forIndexPath: indexPath) as! UserTableViewCell
         cell.titleLabel.text = "\(currentEntry[indexPath.row].title!)"
-        cell.dateLabel.text = "\(currentEntry[indexPath.row].title!)"
+        cell.dateLabel.text = "\(currentEntry[indexPath.row].date!)"
         cell.photoView.image = currentEntry[indexPath.row].image
+//        let dateFormatter = NSDateFormatter()
+//        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+//        let dateObj = dateFormatter.dateFromString(currentEntry[indexPath.row].date!)
+//        if dateObj != nil {
+//            dateFormatter.dateFormat = "MM-dd-yyyy"
+//            cell.dateLabel.text = dateFormatter.stringFromDate(dateObj!)
+//        }
         return cell
     }
     
@@ -132,7 +139,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
 //            annotationView!.detailCalloutAccessoryView = label
     
             //Change background color of pin
-            annotationView?.pinTintColor = UIColor.greenColor()
+            annotationView?.pinTintColor = UIColor.redColor()
             
             var frame = annotationView!.frame
             frame.size.height = 100
