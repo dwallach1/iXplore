@@ -10,31 +10,40 @@ import UIKit
 import MapKit
 import CoreLocation
 
+extension UIColor {
+    class func turquouiseColor() -> UIColor {
+        let colour = UIColor(red: 64/255, green: 224/255, blue: 208/255, alpha: 1)
+        return colour
+    }
+}
+
 class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
-    let tableView = UITableView()
-    let mapView = MKMapView()
+
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var navigationButton: UIButton!
+    //let tableView = UITableView()
+    //let mapView = MKMapView()
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /********** Data Persistence ************/
         let manager = NSFileManager.defaultManager()
         let documents = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
         let fileURL = documents.URLByAppendingPathComponent("journalEntries.txt")
-        let path = fileURL.path
-        
         if let entryArray = NSKeyedUnarchiver.unarchiveObjectWithFile(fileURL.path!) as? [JournalEntry] {
             JournalEntryViewController.sharedInstance.journalEntryList = entryArray
         }
         
         self.title = "iXplore"
-        
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(addButtonTapped))
         self.navigationItem.rightBarButtonItem = addButton
         
-        mapView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height/2 + 100)
-        view.addSubview(mapView)
+//        mapView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.frame.height/2 + 100)
+//        view.addSubview(mapView)
         
         let location = CLLocationCoordinate2D(latitude: -33.906764,longitude: 18.4164983)
         let span = MKCoordinateSpanMake(0.07, 0.07)
@@ -42,12 +51,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
         mapView.setRegion(region, animated: true)
         mapView.zoomEnabled = true
         mapView.showsUserLocation = true
-        mapView.tintColor = UIColor.redColor()
+        mapView.tintColor = UIColor.turquouiseColor()
     
+        /********* Find Current Location Button ******************/
         
-        tableView.frame = CGRect(x: 0, y: view.frame.maxY/2 + 100, width: view.frame.width - 220, height: (view.frame.height/2))
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        view.addSubview(tableView)
+//        let findCurrentLocationButton = UIButton(frame: CGRect(x: 325, y: 350, width: 30, height: 30))
+//        findCurrentLocationButton.setTitle("Current Location!", forState: .Normal)
+//        findCurrentLocationButton.setTitleColor(UIColor.turquouiseColor(), forState: .Normal)
+//        findCurrentLocationButton.addTarget(self, action: #selector(findCurrentLocationButtonTapped), forControlEvents: .TouchUpInside)
+//        findCurrentLocationButton.setImage(UIImage(named: "navigation"), forState: .Normal)
+//        mapView.addSubview(findCurrentLocationButton)
+//        
+        navigationButton.setImage(UIImage(named: "navigation"), forState: .Normal)
+        
+//        tableView.frame = CGRect(x: 0, y: view.frame.maxY/2 + 100, width: view.frame.width - 220, height: (view.frame.height/2))
+//        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+//        view.addSubview(tableView)
         tableView.registerNib(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "entryCell")
         tableView.rowHeight = 88
         
@@ -70,8 +89,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
     func addButtonTapped() {
         let journalEntryVC = JournalEntryViewController(nibName: "JournalEntryViewController", bundle: nil)
         presentViewController(journalEntryVC, animated: true, completion: nil)
+        journalEntryVC.xCoordinatesField.text = "\(locationManager.location!.coordinate.latitude)"
+        journalEntryVC.yCoordinatesField.text = "\(locationManager.location!.coordinate.longitude)"
         locationManager.stopUpdatingLocation()
     }
+    
+    @IBAction func navagationButtonTapped(sender: AnyObject) {
+         mapView.setCenterCoordinate(mapView.userLocation.coordinate, animated: true)
+    }
+    
+//    func findCurrentLocationButtonTapped() {
+//        mapView.setCenterCoordinate(mapView.userLocation.coordinate, animated: true)
+//    }
     
     
     /******** Table View **************/
@@ -114,7 +143,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let location = CLLocationCoordinate2D(latitude: JournalEntryViewController.sharedInstance.journalEntryList[indexPath.row].coordinate.latitude,longitude: JournalEntryViewController.sharedInstance.journalEntryList[indexPath.row].coordinate.longitude)
-        let span = MKCoordinateSpanMake(0.005, 0.005)
+        let span = MKCoordinateSpanMake(0.05, 0.05)
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
     }
@@ -127,6 +156,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
         if annotation is MKUserLocation {
             return nil
         }
+        
         let identifier = "MyPin"
         //Deque annotationView could be nil! We are casting as MKPinAnnotationView because we want to change the color of the pin.
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView
@@ -170,7 +200,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
 //                self.title = placemark.name
 //            }
 //        }
-        locationManager.stopUpdatingLocation()
+//        locationManager.stopUpdatingLocation()
     }
     
     override func didReceiveMemoryWarning() {

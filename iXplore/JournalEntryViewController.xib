@@ -7,9 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JournalEntryViewController" customModule="iXplore" customModuleProvider="target">
             <connections>
+                <outlet property="addPhotoButton" destination="yv0-RD-oT8" id="ZGN-Jg-H26"/>
+                <outlet property="cancelButton" destination="A0f-Eu-fst" id="Q0f-Fs-hU7"/>
                 <outlet property="dateField" destination="SMO-NV-szC" id="eyL-H2-xst"/>
                 <outlet property="imageView" destination="x1f-Wh-ui0" id="ipy-Gd-mUZ"/>
                 <outlet property="notesField" destination="Y2q-zL-seU" id="Mzx-aW-IBG"/>
+                <outlet property="saveButton" destination="rUj-j4-yKK" id="OM2-pa-BuW"/>
                 <outlet property="titleField" destination="NaN-lT-qUd" id="DSZ-Sh-k6G"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="xCoordinatesField" destination="b5S-Yk-Be9" id="2q5-EW-Dhk"/>
@@ -36,20 +39,36 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Y-Coordinate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bt6-oo-JgN">
-                    <rect key="frame" x="472.5" y="220" width="107.5" height="30"/>
+                    <rect key="frame" x="472" y="220" width="107.5" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUj-j4-yKK">
-                    <rect key="frame" x="491" y="400" width="34" height="30"/>
-                    <state key="normal" title="Save"/>
+                    <rect key="frame" x="470" y="400" width="80" height="30"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="cuT-SL-SYc"/>
+                        <constraint firstAttribute="height" constant="30" id="uiE-nS-Bg9"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                    <state key="normal" title="Save">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
                         <action selector="saveButtonTapped:" destination="-1" eventType="touchUpInside" id="hYc-CA-djx"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yv0-RD-oT8">
-                    <rect key="frame" x="50" y="300" width="72" height="30"/>
-                    <state key="normal" title="Add Photo"/>
+                    <rect key="frame" x="35" y="300" width="80" height="30"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="izG-is-wWS"/>
+                        <constraint firstAttribute="height" constant="30" id="o21-bk-Crd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                    <state key="normal" title="Add Photo">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
                         <action selector="addPhotoButtonTapped:" destination="-1" eventType="touchUpInside" id="qdO-cS-aKe"/>
                     </connections>
@@ -62,8 +81,16 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0f-Eu-fst">
-                    <rect key="frame" x="50" y="400" width="48" height="30"/>
-                    <state key="normal" title="Cancel"/>
+                    <rect key="frame" x="35" y="400" width="80" height="30"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="8RR-Jd-xiK"/>
+                        <constraint firstAttribute="height" constant="30" id="gTj-R2-XdE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                    <state key="normal" title="Cancel">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
                         <action selector="cancelButtonTapped:" destination="-1" eventType="touchUpInside" id="smi-lk-FtB"/>
                     </connections>
@@ -76,8 +103,8 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Entry Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NaN-lT-qUd">
-                    <rect key="frame" x="20" y="30" width="389" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Entry Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NaN-lT-qUd">
+                    <rect key="frame" x="20" y="30" width="430" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
@@ -89,15 +116,15 @@
                 <constraint firstItem="NaN-lT-qUd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="Azq-NG-xxH"/>
                 <constraint firstItem="b5S-Yk-Be9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="F7c-aS-P2x"/>
                 <constraint firstAttribute="trailing" secondItem="Bt6-oo-JgN" secondAttribute="trailing" constant="20" id="IFD-fB-rth"/>
-                <constraint firstItem="A0f-Eu-fst" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="J8T-4X-j7o"/>
+                <constraint firstItem="A0f-Eu-fst" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="J8T-4X-j7o"/>
                 <constraint firstItem="A0f-Eu-fst" firstAttribute="top" secondItem="yv0-RD-oT8" secondAttribute="bottom" constant="70" id="JeO-rb-Fsj"/>
                 <constraint firstAttribute="trailing" secondItem="Y2q-zL-seU" secondAttribute="trailing" constant="20" id="TVj-2i-IiN"/>
                 <constraint firstItem="SMO-NV-szC" firstAttribute="leading" secondItem="NaN-lT-qUd" secondAttribute="trailing" constant="30" id="TjE-NQ-Qez"/>
                 <constraint firstItem="yv0-RD-oT8" firstAttribute="top" secondItem="b5S-Yk-Be9" secondAttribute="bottom" constant="50" id="Ton-Jv-Yue"/>
                 <constraint firstItem="b5S-Yk-Be9" firstAttribute="top" secondItem="Y2q-zL-seU" secondAttribute="bottom" constant="20" id="V0K-BO-aqM"/>
-                <constraint firstAttribute="trailing" secondItem="rUj-j4-yKK" secondAttribute="trailing" constant="75" id="d3Q-uX-gDH"/>
+                <constraint firstAttribute="trailing" secondItem="rUj-j4-yKK" secondAttribute="trailing" constant="50" id="d3Q-uX-gDH"/>
                 <constraint firstItem="SMO-NV-szC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="d4H-xh-aqR"/>
-                <constraint firstItem="yv0-RD-oT8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="50" id="feV-zK-kEz"/>
+                <constraint firstItem="yv0-RD-oT8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="feV-zK-kEz"/>
                 <constraint firstItem="b5S-Yk-Be9" firstAttribute="width" secondItem="Bt6-oo-JgN" secondAttribute="width" id="ftl-wY-Jx5"/>
                 <constraint firstItem="x1f-Wh-ui0" firstAttribute="top" secondItem="Bt6-oo-JgN" secondAttribute="bottom" constant="20" id="gOG-Rd-xpX"/>
                 <constraint firstAttribute="trailing" secondItem="x1f-Wh-ui0" secondAttribute="trailing" id="iBK-SN-VJt"/>

@@ -46,17 +46,24 @@ class JournalEntryViewController: UIViewController, UIImagePickerControllerDeleg
     var journalEntryList: [JournalEntry] = [JournalEntry]()
     let imagePicker = UIImagePickerController()
     
-    
+    //Outlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var notesField: UITextView!
     @IBOutlet weak var xCoordinatesField: UITextField!
     @IBOutlet weak var yCoordinatesField: UITextField!
     @IBOutlet weak var dateField: UITextField!
+    @IBOutlet weak var addPhotoButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        
+        addPhotoButton.layer.cornerRadius = 4
+        cancelButton.layer.cornerRadius = 4
+        saveButton.layer.cornerRadius = 4
     }
 
     override func didReceiveMemoryWarning() {
