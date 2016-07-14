@@ -19,31 +19,17 @@ extension UIColor {
 
 class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
-
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var navigationButton: UIButton!
-    //let tableView = UITableView()
-    //let mapView = MKMapView()
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /********** Data Persistence ************/
-        let manager = NSFileManager.defaultManager()
-        let documents = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-        let fileURL = documents.URLByAppendingPathComponent("journalEntries.txt")
-        if let entryArray = NSKeyedUnarchiver.unarchiveObjectWithFile(fileURL.path!) as? [JournalEntry] {
-            JournalEntryViewController.sharedInstance.journalEntryList = entryArray
-        }
-        
         self.title = "iXplore"
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(addButtonTapped))
         self.navigationItem.rightBarButtonItem = addButton
-        
-//        mapView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.frame.height/2 + 100)
-//        view.addSubview(mapView)
         
         let location = CLLocationCoordinate2D(latitude: -33.906764,longitude: 18.4164983)
         let span = MKCoordinateSpanMake(0.07, 0.07)
@@ -52,21 +38,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
         mapView.zoomEnabled = true
         mapView.showsUserLocation = true
         mapView.tintColor = UIColor.turquouiseColor()
-    
-        /********* Find Current Location Button ******************/
-        
-//        let findCurrentLocationButton = UIButton(frame: CGRect(x: 325, y: 350, width: 30, height: 30))
-//        findCurrentLocationButton.setTitle("Current Location!", forState: .Normal)
-//        findCurrentLocationButton.setTitleColor(UIColor.turquouiseColor(), forState: .Normal)
-//        findCurrentLocationButton.addTarget(self, action: #selector(findCurrentLocationButtonTapped), forControlEvents: .TouchUpInside)
-//        findCurrentLocationButton.setImage(UIImage(named: "navigation"), forState: .Normal)
-//        mapView.addSubview(findCurrentLocationButton)
-//        
+
         navigationButton.setImage(UIImage(named: "navigation"), forState: .Normal)
         
-//        tableView.frame = CGRect(x: 0, y: view.frame.maxY/2 + 100, width: view.frame.width - 220, height: (view.frame.height/2))
-//        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-//        view.addSubview(tableView)
         tableView.registerNib(UINib(nibName: "UserTableViewCell", bundle: nil), forCellReuseIdentifier: "entryCell")
         tableView.rowHeight = 88
         
@@ -83,25 +57,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
     
     override func viewDidAppear(animated: Bool) {
         tableView.reloadData()
-        mapView.addAnnotations(JournalEntryViewController.sharedInstance.journalEntryList)
+        mapView.addAnnotations(JournalEntry.list)
     }
     
     func addButtonTapped() {
         let journalEntryVC = JournalEntryViewController(nibName: "JournalEntryViewController", bundle: nil)
         presentViewController(journalEntryVC, animated: true, completion: nil)
-        journalEntryVC.xCoordinatesField.text = "\(locationManager.location!.coordinate.latitude)"
-        journalEntryVC.yCoordinatesField.text = "\(locationManager.location!.coordinate.longitude)"
+        if locationManager.location != nil {
+            journalEntryVC.xCoordinatesField.text = "\(locationManager.location!.coordinate.latitude)"
+            journalEntryVC.yCoordinatesField.text = "\(locationManager.location!.coordinate.longitude)"
+        }
         locationManager.stopUpdatingLocation()
     }
     
     @IBAction func navagationButtonTapped(sender: AnyObject) {
          mapView.setCenterCoordinate(mapView.userLocation.coordinate, animated: true)
     }
-    
-//    func findCurrentLocationButtonTapped() {
-//        mapView.setCenterCoordinate(mapView.userLocation.coordinate, animated: true)
-//    }
-    
     
     /******** Table View **************/
     
@@ -111,15 +82,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
     }
     
     func tableView (tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return JournalEntryViewController.sharedInstance.journalEntryList.count
+        return JournalEntry.list.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        let currentEntry = JournalEntryViewController.sharedInstance.journalEntryList
+        let currentEntry = JournalEntry.list[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("entryCell", forIndexPath: indexPath) as! UserTableViewCell
-        cell.titleLabel.text = "\(currentEntry[indexPath.row].title!)"
-        cell.dateLabel.text = "\(currentEntry[indexPath.row].date!)"
-        cell.photoView.image = currentEntry[indexPath.row].image
+        cell.titleLabel.text = "\(currentEntry.title!)"
+        cell.dateLabel.text = "\(currentEntry.date!)"
+        cell.photoView.image = currentEntry.image
 //        let dateFormatter = NSDateFormatter()
 //        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
 //        let dateObj = dateFormatter.dateFromString(currentEntry[indexPath.row].date!)
@@ -136,13 +107,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath){
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            JournalEntryViewController.sharedInstance.journalEntryList.removeAtIndex(indexPath.row)
+            mapView.removeAnnotation(JournalEntry.list[indexPath.row])
+            JournalEntry.list.removeAtIndex(indexPath.row)
             tableView.reloadData()
         }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let location = CLLocationCoordinate2D(latitude: JournalEntryViewController.sharedInstance.journalEntryList[indexPath.row].coordinate.latitude,longitude: JournalEntryViewController.sharedInstance.journalEntryList[indexPath.row].coordinate.longitude)
+        let location = CLLocationCoordinate2D(latitude: JournalEntry.list[indexPath.row].coordinate.latitude,longitude: JournalEntry.list[indexPath.row].coordinate.longitude)
         let span = MKCoordinateSpanMake(0.05, 0.05)
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)

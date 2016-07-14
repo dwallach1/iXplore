@@ -19,18 +19,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ilB-29-7EU">
-                    <rect key="frame" x="0.0" y="353.5" width="375" height="313.5"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IBE-lw-mgI" userLabel="topView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="423.5"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ayo-Zb-w13">
-                            <rect key="frame" x="0.0" y="0.5" width="375" height="423.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         </mapView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gl-AC-248">
-                            <rect key="frame" x="322.5" y="347" width="30" height="30"/>
+                            <rect key="frame" x="322.5" y="363.5" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="cAW-Ye-OVR"/>
                                 <constraint firstAttribute="height" constant="30" id="zzE-20-TnB"/>
@@ -47,23 +43,34 @@
                         <constraint firstAttribute="bottom" secondItem="ayo-Zb-w13" secondAttribute="bottom" id="aeC-M0-99h"/>
                         <constraint firstItem="6gl-AC-248" firstAttribute="centerX" secondItem="IBE-lw-mgI" secondAttribute="centerX" constant="150" id="f3g-ek-Yxx"/>
                         <constraint firstItem="ayo-Zb-w13" firstAttribute="top" secondItem="IBE-lw-mgI" secondAttribute="top" id="fsk-yV-XbU"/>
-                        <constraint firstItem="6gl-AC-248" firstAttribute="centerY" secondItem="IBE-lw-mgI" secondAttribute="centerY" constant="150" id="ra5-QJ-NwW"/>
+                        <constraint firstItem="6gl-AC-248" firstAttribute="centerY" secondItem="IBE-lw-mgI" secondAttribute="centerY" constant="45" id="ra5-QJ-NwW"/>
                         <constraint firstItem="ayo-Zb-w13" firstAttribute="leading" secondItem="IBE-lw-mgI" secondAttribute="leading" id="zOG-wO-sma"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ilB-29-7EU">
+                    <rect key="frame" x="0.0" y="403.5" width="375" height="263.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ilB-29-7EU" secondAttribute="trailing" id="0pe-ZU-qDC"/>
                 <constraint firstItem="IBE-lw-mgI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="FJB-DM-lCv"/>
                 <constraint firstItem="ilB-29-7EU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GVZ-ca-aNp"/>
+                <constraint firstItem="ilB-29-7EU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="bottom" constant="264" id="LBh-dy-Z0q"/>
                 <constraint firstItem="IBE-lw-mgI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WE7-io-pv9"/>
-                <constraint firstItem="ilB-29-7EU" firstAttribute="top" secondItem="IBE-lw-mgI" secondAttribute="bottom" constant="-70" id="dwO-Nl-lIr"/>
                 <constraint firstAttribute="trailing" secondItem="IBE-lw-mgI" secondAttribute="trailing" id="fU9-Vy-FSh"/>
-                <constraint firstItem="ilB-29-7EU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="20" id="ljR-G8-sTk"/>
+                <constraint firstItem="ilB-29-7EU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="70" id="ljR-G8-sTk"/>
                 <constraint firstAttribute="bottom" secondItem="ilB-29-7EU" secondAttribute="bottom" id="rN6-ft-wNz"/>
+                <constraint firstAttribute="bottom" secondItem="IBE-lw-mgI" secondAttribute="bottom" id="wfO-UJ-cYm"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="LBh-dy-Z0q"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>

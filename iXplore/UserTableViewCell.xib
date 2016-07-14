@@ -54,6 +54,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="g2f-rg-d4G" firstAttribute="leading" secondItem="7pF-gl-akj" secondAttribute="trailing" constant="15" id="56U-G4-hgW"/>
                     <constraint firstAttribute="bottom" secondItem="7pF-gl-akj" secondAttribute="bottom" id="Bfz-6K-oL6"/>
@@ -63,6 +64,7 @@
                     <constraint firstAttribute="trailing" secondItem="g2f-rg-d4G" secondAttribute="trailing" id="uxM-VF-CaP"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="dateLabel" destination="75o-NH-gGw" id="NfD-pq-CfB"/>
                 <outlet property="photoView" destination="7pF-gl-akj" id="SLX-Pi-s7I"/>

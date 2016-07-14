@@ -16,11 +16,6 @@ class UserTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        // Initialization code
-//        let titleLabel.text = entry.title
-//        let dateLabel.text = entry.date
-//        let imageView.image = entry.image
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

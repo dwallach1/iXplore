@@ -95,7 +95,7 @@
                         <action selector="cancelButtonTapped:" destination="-1" eventType="touchUpInside" id="smi-lk-FtB"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MM/DD/YYYY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SMO-NV-szC">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SMO-NV-szC" customClass="UIDatePickerTextField" customModule="iXplore" customModuleProvider="target">
                     <rect key="frame" x="480" y="30" width="100" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="wRW-ON-OR9"/>

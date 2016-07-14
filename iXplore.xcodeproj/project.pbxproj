@@ -18,6 +18,17 @@
 		6355DB7B1D33F6470070E066 /* JournalEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6355DB791D33F6470070E066 /* JournalEntryViewController.xib */; };
 		63600FCC1D3562AC00A5930F /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63600FCA1D3562AC00A5930F /* UserTableViewCell.swift */; };
 		63600FCD1D3562AC00A5930F /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63600FCB1D3562AC00A5930F /* UserTableViewCell.xib */; };
+		6360102C1D36A5FE00A5930F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6360102A1D36A5FE00A5930F /* LoginViewController.swift */; };
+		6360102D1D36A5FE00A5930F /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6360102B1D36A5FE00A5930F /* LoginViewController.xib */; };
+		6360104F1D37B01200A5930F /* DatePickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6360104E1D37B01200A5930F /* DatePickerTextField.swift */; };
+		6377A2271D37BB0000160B04 /* AccountKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6377A21F1D37BB0000160B04 /* AccountKit.framework */; };
+		6377A2281D37BB0000160B04 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6377A2201D37BB0000160B04 /* Bolts.framework */; };
+		6377A2291D37BB0000160B04 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6377A2211D37BB0000160B04 /* FBAudienceNetwork.framework */; };
+		6377A22A1D37BB0000160B04 /* FBNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6377A2221D37BB0000160B04 /* FBNotifications.framework */; };
+		6377A22B1D37BB0000160B04 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6377A2231D37BB0000160B04 /* FBSDKCoreKit.framework */; };
+		6377A22C1D37BB0000160B04 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6377A2241D37BB0000160B04 /* FBSDKLoginKit.framework */; };
+		6377A22D1D37BB0000160B04 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6377A2251D37BB0000160B04 /* FBSDKMessengerShareKit.framework */; };
+		6377A22E1D37BB0000160B04 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6377A2261D37BB0000160B04 /* FBSDKShareKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +66,18 @@
 		6355DB791D33F6470070E066 /* JournalEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JournalEntryViewController.xib; sourceTree = "<group>"; };
 		63600FCA1D3562AC00A5930F /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		63600FCB1D3562AC00A5930F /* UserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
+		6360102A1D36A5FE00A5930F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		6360102B1D36A5FE00A5930F /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		6360104E1D37B01200A5930F /* DatePickerTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTextField.swift; sourceTree = "<group>"; };
+		6377A21F1D37BB0000160B04 /* AccountKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AccountKit.framework; sourceTree = "<group>"; };
+		6377A2201D37BB0000160B04 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		6377A2211D37BB0000160B04 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
+		6377A2221D37BB0000160B04 /* FBNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBNotifications.framework; sourceTree = "<group>"; };
+		6377A2231D37BB0000160B04 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		6377A2241D37BB0000160B04 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		6377A2251D37BB0000160B04 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
+		6377A2261D37BB0000160B04 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		6377A22F1D37BB3300160B04 /* iXplore-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iXplore-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +85,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6377A22E1D37BB0000160B04 /* FBSDKShareKit.framework in Frameworks */,
+				6377A22B1D37BB0000160B04 /* FBSDKCoreKit.framework in Frameworks */,
+				6377A2291D37BB0000160B04 /* FBAudienceNetwork.framework in Frameworks */,
+				6377A22C1D37BB0000160B04 /* FBSDKLoginKit.framework in Frameworks */,
+				6377A2271D37BB0000160B04 /* AccountKit.framework in Frameworks */,
+				6377A2281D37BB0000160B04 /* Bolts.framework in Frameworks */,
+				6377A22A1D37BB0000160B04 /* FBNotifications.framework in Frameworks */,
+				6377A22D1D37BB0000160B04 /* FBSDKMessengerShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +120,15 @@
 				6355DB5A1D33E65D0070E066 /* iXploreTests */,
 				6355DB651D33E65D0070E066 /* iXploreUITests */,
 				6355DB441D33E65D0070E066 /* Products */,
+				6377A21F1D37BB0000160B04 /* AccountKit.framework */,
+				6377A2201D37BB0000160B04 /* Bolts.framework */,
+				6377A2211D37BB0000160B04 /* FBAudienceNetwork.framework */,
+				6377A2221D37BB0000160B04 /* FBNotifications.framework */,
+				6377A2231D37BB0000160B04 /* FBSDKCoreKit.framework */,
+				6377A2241D37BB0000160B04 /* FBSDKLoginKit.framework */,
+				6377A2251D37BB0000160B04 /* FBSDKMessengerShareKit.framework */,
+				6377A2261D37BB0000160B04 /* FBSDKShareKit.framework */,
+				6377A22F1D37BB3300160B04 /* iXplore-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,11 +148,14 @@
 				6355DB461D33E65D0070E066 /* AppDelegate.swift */,
 				6355DB4D1D33E65D0070E066 /* Assets.xcassets */,
 				6355DB741D33E6FD0070E066 /* MapViewController.swift */,
-				6355DB781D33F6470070E066 /* JournalEntryViewController.swift */,
 				6355DB751D33E6FD0070E066 /* MapViewController.xib */,
+				6355DB781D33F6470070E066 /* JournalEntryViewController.swift */,
 				6355DB791D33F6470070E066 /* JournalEntryViewController.xib */,
 				63600FCA1D3562AC00A5930F /* UserTableViewCell.swift */,
 				63600FCB1D3562AC00A5930F /* UserTableViewCell.xib */,
+				6360102A1D36A5FE00A5930F /* LoginViewController.swift */,
+				6360102B1D36A5FE00A5930F /* LoginViewController.xib */,
+				6360104E1D37B01200A5930F /* DatePickerTextField.swift */,
 				6355DB4F1D33E65D0070E066 /* LaunchScreen.storyboard */,
 				6355DB521D33E65D0070E066 /* Info.plist */,
 			);
@@ -161,9 +204,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6355DB6E1D33E65D0070E066 /* Build configuration list for PBXNativeTarget "iXploreTests" */;
 			buildPhases = (
+				9E3E3AAD5856784B3EC00E3B /* [CP] Check Pods Manifest.lock */,
 				6355DB531D33E65D0070E066 /* Sources */,
 				6355DB541D33E65D0070E066 /* Frameworks */,
 				6355DB551D33E65D0070E066 /* Resources */,
+				5A960B8BFA238E8D03EE4215 /* [CP] Embed Pods Frameworks */,
+				8404BC93663D04BAB6F483D9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -179,9 +225,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6355DB711D33E65D0070E066 /* Build configuration list for PBXNativeTarget "iXploreUITests" */;
 			buildPhases = (
+				BEB5973F2F5BA50F356E2D20 /* [CP] Check Pods Manifest.lock */,
 				6355DB5E1D33E65D0070E066 /* Sources */,
 				6355DB5F1D33E65D0070E066 /* Frameworks */,
 				6355DB601D33E65D0070E066 /* Resources */,
+				A2616FC12E815F56EE6FF9F9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -244,6 +292,7 @@
 			files = (
 				6355DB511D33E65D0070E066 /* LaunchScreen.storyboard in Resources */,
 				6355DB771D33E6FD0070E066 /* MapViewController.xib in Resources */,
+				6360102D1D36A5FE00A5930F /* LoginViewController.xib in Resources */,
 				6355DB4E1D33E65D0070E066 /* Assets.xcassets in Resources */,
 				6355DB7B1D33F6470070E066 /* JournalEntryViewController.xib in Resources */,
 				63600FCD1D3562AC00A5930F /* UserTableViewCell.xib in Resources */,
@@ -266,6 +315,84 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5A960B8BFA238E8D03EE4215 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iXploreTests/Pods-iXploreTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8404BC93663D04BAB6F483D9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iXploreTests/Pods-iXploreTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E3E3AAD5856784B3EC00E3B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A2616FC12E815F56EE6FF9F9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iXploreUITests/Pods-iXploreUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BEB5973F2F5BA50F356E2D20 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6355DB3F1D33E65D0070E066 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -274,7 +401,9 @@
 				63600FCC1D3562AC00A5930F /* UserTableViewCell.swift in Sources */,
 				6355DB761D33E6FD0070E066 /* MapViewController.swift in Sources */,
 				6355DB471D33E65D0070E066 /* AppDelegate.swift in Sources */,
+				6360102C1D36A5FE00A5930F /* LoginViewController.swift in Sources */,
 				6355DB7A1D33F6470070E066 /* JournalEntryViewController.swift in Sources */,
+				6360104F1D37B01200A5930F /* DatePickerTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,13 +537,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = iXplore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidwallach.iXplore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "iXplore-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -422,13 +558,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = iXplore/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.davidwallach.iXplore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "iXplore-Bridging-Header.h";
 			};
 			name = Release;
 		};

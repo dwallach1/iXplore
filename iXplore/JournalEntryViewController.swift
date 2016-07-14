@@ -11,22 +11,36 @@ import MapKit
 
 
 class JournalEntry: NSObject, MKAnnotation, NSCoding {
+    
+    static var list: [JournalEntry] = {
+        let manager = NSFileManager.defaultManager()
+        let documents = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+        let fileURL = documents.URLByAppendingPathComponent("journalEntries.txt")
+        if let entryArray = NSKeyedUnarchiver.unarchiveObjectWithFile(fileURL.path!) as? [JournalEntry] {
+            return entryArray
+        } else {
+            return []
+        }
+    }()
+    
     var title: String? = "Journal Entry"
     var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D()
     var notes: String?    
-    var date: String? = "12/2/2016"
+    var date: String?
     var image: UIImage?
     
-    override required init ()
-    {
-        
+    init(title: String, notes: String, coordinate: CLLocationCoordinate2D) {
+        self.title = title
+        self.notes = notes
+        self.coordinate = coordinate
     }
+    
     required init? (coder: NSCoder){
         title = coder.decodeObjectForKey("title") as? String
         coordinate.latitude = (coder.decodeDoubleForKey("coordinateLat"))
         coordinate.longitude = (coder.decodeDoubleForKey("coordinateLong"))
         notes = coder.decodeObjectForKey("notes") as? String
-        date = coder.decodeObjectForKey("date") as? String
+        date =  coder.decodeObjectForKey("date") as? String
         image = coder.decodeObjectForKey("image") as? UIImage
     }
     
@@ -42,8 +56,6 @@ class JournalEntry: NSObject, MKAnnotation, NSCoding {
 
 class JournalEntryViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    static var sharedInstance = JournalEntryViewController()
-    var journalEntryList: [JournalEntry] = [JournalEntry]()
     let imagePicker = UIImagePickerController()
     
     //Outlets
@@ -64,6 +76,15 @@ class JournalEntryViewController: UIViewController, UIImagePickerControllerDeleg
         addPhotoButton.layer.cornerRadius = 4
         cancelButton.layer.cornerRadius = 4
         saveButton.layer.cornerRadius = 4
+        
+        let toolBar = UIToolbar().ToolbarPiker(#selector(JournalEntryViewController.dismissPicker))
+        dateField.inputAccessoryView = toolBar
+        titleField.inputAccessoryView = toolBar
+        notesField.inputAccessoryView = toolBar
+    }
+    
+    func dismissPicker() {
+        view.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,14 +97,11 @@ class JournalEntryViewController: UIViewController, UIImagePickerControllerDeleg
         let documents = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
         let fileURL = documents.URLByAppendingPathComponent("journalEntries.txt")
         
-        let newEntry = JournalEntry()
-        newEntry.title = titleField.text!
-        newEntry.notes = notesField.text!
-        newEntry.coordinate = CLLocationCoordinate2D(latitude: Double(xCoordinatesField.text!)!,longitude: Double(yCoordinatesField.text!)!)
+        let newEntry = JournalEntry(title: titleField.text!, notes: notesField.text!, coordinate: CLLocationCoordinate2D(latitude: Double(xCoordinatesField.text!)!,longitude: Double(yCoordinatesField.text!)!))
         newEntry.image = imageView.image
         newEntry.date = dateField.text!
-        JournalEntryViewController.sharedInstance.journalEntryList.append(newEntry)
-        NSKeyedArchiver.archiveRootObject(JournalEntryViewController.sharedInstance.journalEntryList, toFile: fileURL.path!)
+        JournalEntry.list.append(newEntry)
+        NSKeyedArchiver.archiveRootObject(JournalEntry.list, toFile: fileURL.path!)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
