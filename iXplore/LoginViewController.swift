@@ -15,6 +15,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidLoad()
         if (FBSDKAccessToken.currentAccessToken() != nil) {
             // User is already logged in, do work such as go to next view controller.
+            presentViewController(navigationController!, animated: true, completion: nil)
+//            let MapVC = MapViewController(nibName: "MapViewController", bundle: nil)
+//            presentViewController(MapVC, animated: true, completion: nil)
+
         } else {
             let loginButton = FBSDKLoginButton()
             loginButton.center = view.center 
@@ -35,8 +39,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             if result.grantedPermissions.contains("email")
             {
                 // Do work
-                let MapVC = MapViewController(nibName: "MapViewController", bundle: nil)
-                presentViewController(MapVC, animated: true, completion: nil)
+//                let MapVC = MapViewController(nibName: "MapViewController", bundle: nil)
+//                presentViewController(MapVC, animated: true, completion: nil)
+                presentViewController(navigationController!, animated: true, completion: nil)
+
             }
         }
     }

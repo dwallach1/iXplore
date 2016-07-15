@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import FBSDKShareKit
 
 extension UIColor {
     class func turquouiseColor() -> UIColor {
@@ -23,16 +24,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var navigationButton: UIButton!
     let locationManager = CLLocationManager()
+    let imagePicker = UIImagePickerController()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if (FBSDKAccessToken.currentAccessToken() != nil) {
+            // User is already logged in, do work such as go to next view controller.
+        } else {
+            let loginVC = LoginViewController(nibName: "LoginViewController", bundle: nil)
+            presentViewController(loginVC, animated: true, completion: nil)
+        }
+
         self.title = "iXplore"
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(addButtonTapped))
         self.navigationItem.rightBarButtonItem = addButton
         
         let location = CLLocationCoordinate2D(latitude: -33.906764,longitude: 18.4164983)
-        let span = MKCoordinateSpanMake(0.07, 0.07)
+        let span = MKCoordinateSpanMake(0.4, 0.4)
         let region = MKCoordinateRegion(center: location, span: span)
         mapView.setRegion(region, animated: true)
         mapView.zoomEnabled = true
@@ -71,7 +81,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
     }
     
     @IBAction func navagationButtonTapped(sender: AnyObject) {
-         mapView.setCenterCoordinate(mapView.userLocation.coordinate, animated: true)
+        let span = MKCoordinateSpanMake(0.4, 0.4)
+        let region = MKCoordinateRegion(center: mapView.userLocation.coordinate, span: span)
+        mapView.setRegion(region, animated: true)
+//        mapView.setCenterCoordinate(mapView.userLocation.coordinate, animated: true)
     }
     
     /******** Table View **************/
@@ -91,13 +104,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
         cell.titleLabel.text = "\(currentEntry.title!)"
         cell.dateLabel.text = "\(currentEntry.date!)"
         cell.photoView.image = currentEntry.image
-//        let dateFormatter = NSDateFormatter()
-//        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
-//        let dateObj = dateFormatter.dateFromString(currentEntry[indexPath.row].date!)
-//        if dateObj != nil {
-//            dateFormatter.dateFormat = "MM-dd-yyyy"
-//            cell.dateLabel.text = dateFormatter.stringFromDate(dateObj!)
-//        }
         return cell
     }
     
@@ -177,7 +183,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, UITableViewDelegat
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }
